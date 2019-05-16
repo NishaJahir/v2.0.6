@@ -26,6 +26,7 @@ use Plenty\Modules\Basket\Contracts\BasketRepositoryContract;
 use Novalnet\Services\PaymentService;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\ConfigRepository;
+use Plenty\Plugin\Log\Loggable;
 
 /**
  * Class PaymentController
@@ -33,7 +34,7 @@ use Plenty\Plugin\ConfigRepository;
  * @package Novalnet\Controllers
  */
 class PaymentController extends Controller
-{ 
+{ use Loggable;
 	/**
 	 * @var Request
 	 */
@@ -122,7 +123,9 @@ class PaymentController extends Controller
 		$responseData = $this->request->all();
 		$isPaymentSuccess = isset($responseData['status']) && in_array($responseData['status'], ['90','100']);
 		$notificationMessage = $this->paymentHelper->getNovalnetStatusText($responseData);
+		$this->getLogger(__METHOD__)->error('redirect', $notificationMessage);
 		if ($isPaymentSuccess) {
+			$this->getLogger(__METHOD__)->error('enter', $notificationMessage);
 			$this->paymentService->pushNotification($notificationMessage, 'success', 100);
 		} else {
 			$this->paymentService->pushNotification($notificationMessage, 'error', 100);	
@@ -144,6 +147,7 @@ class PaymentController extends Controller
 	{
 		$requestData = $this->request->all();
 		$notificationMessage = $this->paymentHelper->getNovalnetStatusText($requestData);
+		$this->getLogger(__METHOD__)->error('cc', $notificationMessage);
 		$basket = $this->basketRepository->load();	
 		$billingAddressId = $basket->customerInvoiceAddressId;
 		$address = $this->addressRepository->findAddressById($billingAddressId);
@@ -220,6 +224,7 @@ class PaymentController extends Controller
 		$response = $this->paymentHelper->executeCurl($serverRequestData['data'], $serverRequestData['url']);
 		$responseData = $this->paymentHelper->convertStringToArray($response['response'], '&');
 		$notificationMessage = $this->paymentHelper->getNovalnetStatusText($responseData);
+		$this->getLogger(__METHOD__)->error('form', $notificationMessage);
 		$responseData['payment_id'] = (!empty($responseData['payment_id'])) ? $responseData['payment_id'] : $responseData['key'];
 		$isPaymentSuccess = isset($responseData['status']) && $responseData['status'] == '100';
 		
