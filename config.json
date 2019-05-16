@@ -195,12 +195,12 @@
                }
             },
             "novalnet_cc_payment_action": {
-          "type": "multiCheckBox",
+          "type": "selectBox",
           "required": false,
           "label": "Config.paymentActionLabel",
           "options": {
             "defaultValue": "false",
-            "checkBoxValues": [
+            "selectBoxValues": [
               {
                 "value": "false",
                 "caption": "Config.onholdCapture"
@@ -209,10 +209,9 @@
                 "value": "true",
                 "caption": "Config.onholdAuthorize"
               }
-              
             ]
-      }
-    },
+          }
+        },
             "novalnet_cc_on_hold":{  
                "type":"inputText",
                "required":false,
@@ -335,12 +334,12 @@
                }
             },
             "novalnet_sepa_payment_action": {
-          "type": "multiCheckBox",
+          "type": "selectBox",
           "required": false,
           "label": "Config.paymentActionLabel",
           "options": {
             "defaultValue": "false",
-            "checkBoxValues": [
+            "selectBoxValues": [
               {
                 "value": "false",
                 "caption": "Config.onholdCapture"
@@ -349,10 +348,9 @@
                 "value": "true",
                 "caption": "Config.onholdAuthorize"
               }
-              
             ]
-      }
-    },
+          }
+        },
             "novalnet_sepa_on_hold":{  
                "type":"inputText",
                "required":false,
@@ -483,13 +481,14 @@
                   "defaultValue":""
                }
             },
-            "novalnet_invoice_payment_action": {
-          "type": "multiCheckBox",
+            
+          "novalnet_invoice_payment_action": {
+          "type": "selectBox",
           "required": false,
           "label": "Config.paymentActionLabel",
           "options": {
             "defaultValue": "false",
-            "checkBoxValues": [
+            "selectBoxValues": [
               {
                 "value": "false",
                 "caption": "Config.onholdCapture"
@@ -498,10 +497,9 @@
                 "value": "true",
                 "caption": "Config.onholdAuthorize"
               }
-              
             ]
-      }
-    },
+          }
+        },
             "novalnet_invoice_on_hold":{  
                "type":"inputText",
                "required":false,
@@ -894,12 +892,12 @@
                }
             },
             "novalnet_paypal_payment_action": {
-          "type": "multiCheckBox",
+          "type": "selectBox",
           "required": false,
           "label": "Config.paymentActionLabel",
           "options": {
             "defaultValue": "false",
-            "checkBoxValues": [
+            "selectBoxValues": [
               {
                 "value": "false",
                 "caption": "Config.onholdCapture"
@@ -908,10 +906,9 @@
                 "value": "true",
                 "caption": "Config.onholdAuthorize"
               }
-              
             ]
-      }
-    },
+          }
+        },
             "novalnet_paypal_on_hold":{  
                "type":"inputText",
                "required":false,
