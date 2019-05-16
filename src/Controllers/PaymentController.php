@@ -28,6 +28,8 @@ use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\ConfigRepository;
 use Plenty\Plugin\Log\Loggable;
 use IO\Services\NotificationService;
+use IO\Constants\LogLevel;
+
 /**
  * Class PaymentController
  *
