@@ -109,7 +109,7 @@ class PaymentService
     public function pushNotification($message, $type, $code = 0) {
 	   
 	$notifications = json_decode($this->sessionStorage->getPlugin()->getValue('notifications'), true);	
-	$this->getLogger(__METHOD__)->error('push', $notifications);	
+		
    	$notification = [
             'message'       => $message,
             'code'          => $code,
@@ -120,14 +120,12 @@ class PaymentService
 
         if( !is_null($lastNotification) )
  	{
-		$this->getLogger(__METHOD__)->error('if', json_encode($lastNotification));
             $notification['stackTrace'] = $lastNotification['stackTrace'];
             $lastNotification['stackTrace'] = [];
             array_push( $notification['stackTrace'], $lastNotification );
         }
         
         $notifications[$type] = $notification;
-          $this->getLogger(__METHOD__)->error('end', json_encode($notifications));
 		$this->sessionStorage->getPlugin()->setValue('notifications', json_encode($notifications));
 	}
     /**
