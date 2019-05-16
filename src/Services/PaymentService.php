@@ -441,9 +441,9 @@ class PaymentService
 	    $url = $this->getpaymentUrl($paymentKey);
 	    if(in_array($paymentKey, ['NOVALNET_CC', 'NOVALNET_SEPA', 'NOVALNET_PAYPAL', 'NOVALNET_INVOICE'])) {
 			$onHoldLimit = $this->paymentHelper->getNovalnetConfig(strtolower($paymentKey) . '_on_hold');
-		    $this->getLogger(__METHOD__)->error('onhold', $onHoldLimit);
 		        $onHoldAuthorize = $this->paymentHelper->getNovalnetConfig(strtolower($paymentKey) . '_payment_action');
-		if((is_numeric($onHoldLimit) && $paymentRequestData['amount'] >= $onHoldLimit && $onHoldAuthorize == 'true') || ($onHoldAuthorize == 'true' && empty($onHoldLimit))) {
+		$this->getLogger(__METHOD__)->error('payment action', $onHoldAuthorize);
+		    if((is_numeric($onHoldLimit) && $paymentRequestData['amount'] >= $onHoldLimit && $onHoldAuthorize == 'true') || ($onHoldAuthorize == 'true' && empty($onHoldLimit))) {
 		    $paymentRequestData['on_hold'] = '1';
 		}
 		if($paymentKey == 'NOVALNET_CC') {
