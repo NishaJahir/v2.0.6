@@ -159,6 +159,7 @@ class PaymentController extends Controller
 			$serverRequestData['data']['unique_id'] = $requestData['nn_unique_id'];
 			if($this->config->get('Novalnet.novalnet_cc_3d') == 'true' || $this->config->get('Novalnet.novalnet_cc_3d_fraudcheck') == 'true' )
 			{
+				$this->getLogger(__METHOD__)->error('33', $notificationMessage);
 				$this->sessionStorage->getPlugin()->setValue('nnPaymentData', $serverRequestData['data']);
 				$this->sessionStorage->getPlugin()->setValue('nnPaymentUrl',$serverRequestData['url']);
 				$this->paymentService->pushNotification($notificationMessage, 'success', 100);
