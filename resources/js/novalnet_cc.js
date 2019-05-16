@@ -84,7 +84,7 @@ $(document).ready(
     $('#novalnet_form_btn').hide();
 });
 		
-		novalnet_form_btn
+		
 	}
 );
 
