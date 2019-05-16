@@ -27,7 +27,7 @@ use Novalnet\Services\PaymentService;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\ConfigRepository;
 use Plenty\Plugin\Log\Loggable;
-
+use IO\Services\NotificationService;
 /**
  * Class PaymentController
  *
@@ -125,8 +125,10 @@ class PaymentController extends Controller
 		$notificationMessage = $this->paymentHelper->getNovalnetStatusText($responseData);
 		$this->getLogger(__METHOD__)->error('redirect', $notificationMessage);
 		if ($isPaymentSuccess) {
-			$this->getLogger(__METHOD__)->error('enter', $notificationMessage);
-			$this->paymentService->pushNotification($notificationMessage, 'success', 8);
+			$this->getLogger(__METHOD__)->error('entry', $notificationMessage);
+			$notificationService = pluginApp(NotificationService::class);
+                	$notificationService->addNotificationCode(LogLevel::SUCCESS, 7);
+			//$this->paymentService->pushNotification($notificationMessage, 'success', 8);
 		} else {
 			$this->paymentService->pushNotification($notificationMessage, 'error', 100);	
 		}
