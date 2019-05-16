@@ -739,14 +739,15 @@ class PaymentService
             } elseif ($this->config->get('Novalnet.'.$paymentKeyLow.'_payment_guarantee_force_active') == 'true') {   
                 $processingType = 'normal';
             } else {
+		    $processingType = '';
                 if ( ! in_array( $customerBillingIsoCode, array( 'AT', 'DE', 'CH' ), true ) ) {
-					$processingType = $this->paymentHelper->getTranslatedText('guarantee_country_error');					
-				} elseif ( $basket->currency !== 'EUR' ) {
-					$processingType = $this->paymentHelper->getTranslatedText('guarantee_currency_error');					
-				} elseif ( ! empty( array_diff( $billingAddress, $shippingAddress ) ) ) {
-					$processingType = $this->paymentHelper->getTranslatedText('guarantee_address_error');					
-				} elseif ( (int) $amount < (int) $minimumAmount ) {
-					$processingType = $this->paymentHelper->getTranslatedText('guarantee_minimum_amount_error'). ' ' . $minimumAmount/100 . ' ' . 'EUR)';					
+					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_country_error').PHP_EOL;					
+				} if ( $basket->currency !== 'EUR' ) {
+					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_currency_error').PHP_EOL;					
+				} if ( ! empty( array_diff( $billingAddress, $shippingAddress ) ) ) {
+					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_address_error').PHP_EOL;					
+				} if ( (int) $amount < (int) $minimumAmount ) {
+					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_minimum_amount_error'). ' ' . $minimumAmount/100 . ' ' . 'EUR)';					
 				}
             }
             return $processingType;
