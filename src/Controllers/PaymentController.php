@@ -126,7 +126,7 @@ class PaymentController extends Controller
 		$this->getLogger(__METHOD__)->error('redirect', $notificationMessage);
 		if ($isPaymentSuccess) {
 			$this->getLogger(__METHOD__)->error('enter', $notificationMessage);
-			$this->paymentService->pushNotification($notificationMessage, 'success', 100);
+			$this->paymentService->pushNotification($notificationMessage, 'success', 8);
 		} else {
 			$this->paymentService->pushNotification($notificationMessage, 'error', 100);	
 		}
