@@ -34,6 +34,11 @@ function getHash(e)
 	} else {
 		return true;
 	}
+	
+	$(window).load(function() {
+    $('#novalnet_form_btn').hide();
+});
+	
 }
 
 function reSize()
@@ -80,9 +85,6 @@ $(document).ready(
 		reSize();
 		}
 	);
-	$(window).load(function() {
-    $('#novalnet_form_btn').hide();
-});
 		
 		
 	}
