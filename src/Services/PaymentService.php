@@ -107,7 +107,7 @@ class PaymentService
      *
      */
     public function pushNotification($message, $type, $code = 0) {
-	    $this->getLogger(__METHOD__)->error('cc', $notificationMessage);
+	   
 	$notifications = json_decode($this->sessionStorage->getPlugin()->getValue('notifications'), true);	
 	$this->getLogger(__METHOD__)->error('push', $notifications);	
    	$notification = [
