@@ -741,11 +741,11 @@ class PaymentService
             } else {
 		    $processingType = '';
                 if ( ! in_array( $customerBillingIsoCode, array( 'AT', 'DE', 'CH' ), true ) ) {
-					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_country_error').PHP_EOL;					
+					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_country_error').'</br>';					
 				} if ( $basket->currency !== 'EUR' ) {
-					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_currency_error').PHP_EOL;					
+					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_currency_error').'</br>';					
 				} if ( ! empty( array_diff( $billingAddress, $shippingAddress ) ) ) {
-					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_address_error').PHP_EOL;					
+					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_address_error').'</br>';					
 				} if ( (int) $amount < (int) $minimumAmount ) {
 					$processingType .= $this->paymentHelper->getTranslatedText('guarantee_minimum_amount_error'). ' ' . $minimumAmount/100 . ' ' . 'EUR)';					
 				}
