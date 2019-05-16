@@ -80,7 +80,11 @@ $(document).ready(
 		reSize();
 		}
 	);
+	$(window).load(function() {
+    $('#novalnet_form_btn').hide();
+});
 		
+		novalnet_form_btn
 	}
 );
 
