@@ -27,8 +27,6 @@ use Novalnet\Services\PaymentService;
 use Plenty\Plugin\Templates\Twig;
 use Plenty\Plugin\ConfigRepository;
 use Plenty\Plugin\Log\Loggable;
-use IO\Services\NotificationService;
-use IO\Constants\LogLevel;
 
 /**
  * Class PaymentController
@@ -125,12 +123,9 @@ class PaymentController extends Controller
 		$responseData = $this->request->all();
 		$isPaymentSuccess = isset($responseData['status']) && in_array($responseData['status'], ['90','100']);
 		$notificationMessage = $this->paymentHelper->getNovalnetStatusText($responseData);
-		$this->getLogger(__METHOD__)->error('redirect', $notificationMessage);
+		
 		if ($isPaymentSuccess) {
-			$this->getLogger(__METHOD__)->error('entry', $notificationMessage);
-			$notificationService = pluginApp(NotificationService::class);
-                	$notificationService->addNotificationCode(LogLevel::SUCCESS, 7);
-			//$this->paymentService->pushNotification($notificationMessage, 'success', 8);
+			$this->paymentService->pushNotification($notificationMessage, 'success', 100);
 		} else {
 			$this->paymentService->pushNotification($notificationMessage, 'error', 100);	
 		}
@@ -151,7 +146,6 @@ class PaymentController extends Controller
 	{
 		$requestData = $this->request->all();
 		$notificationMessage = $this->paymentHelper->getNovalnetStatusText($requestData);
-		$this->getLogger(__METHOD__)->error('cc', $notificationMessage);
 		$basket = $this->basketRepository->load();	
 		$billingAddressId = $basket->customerInvoiceAddressId;
 		$address = $this->addressRepository->findAddressById($billingAddressId);
@@ -163,7 +157,6 @@ class PaymentController extends Controller
 			$serverRequestData['data']['unique_id'] = $requestData['nn_unique_id'];
 			if($this->config->get('Novalnet.novalnet_cc_3d') == 'true' || $this->config->get('Novalnet.novalnet_cc_3d_fraudcheck') == 'true' )
 			{
-				$this->getLogger(__METHOD__)->error('33', $notificationMessage);
 				$this->sessionStorage->getPlugin()->setValue('nnPaymentData', $serverRequestData['data']);
 				$this->sessionStorage->getPlugin()->setValue('nnPaymentUrl',$serverRequestData['url']);
 				$this->paymentService->pushNotification($notificationMessage, 'success', 100);
@@ -229,7 +222,6 @@ class PaymentController extends Controller
 		$response = $this->paymentHelper->executeCurl($serverRequestData['data'], $serverRequestData['url']);
 		$responseData = $this->paymentHelper->convertStringToArray($response['response'], '&');
 		$notificationMessage = $this->paymentHelper->getNovalnetStatusText($responseData);
-		$this->getLogger(__METHOD__)->error('form', $notificationMessage);
 		$responseData['payment_id'] = (!empty($responseData['payment_id'])) ? $responseData['payment_id'] : $responseData['key'];
 		$isPaymentSuccess = isset($responseData['status']) && $responseData['status'] == '100';
 		
