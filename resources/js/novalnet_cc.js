@@ -35,10 +35,6 @@ function getHash(e)
 		return true;
 	}
 	
-	$(window).load(function() {
-    $('#novalnet_form_btn').hide();
-});
-	
 }
 
 function reSize()
