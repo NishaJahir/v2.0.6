@@ -21,6 +21,8 @@ function initIframe()
 
 function getHash(e)
 {	
+	$('#novalnet_form_btn').attr('disabled',true);	
+	
 	if($('#nn_pan_hash').val().trim() == '') {
 		e.preventDefault();
 		e.stopImmediatePropagation();
@@ -31,7 +33,7 @@ function getHash(e)
 				}
 			), targetOrigin
 		);
-	} else {
+	} else {	
 		return true;
 	}
 	
@@ -75,10 +77,7 @@ window.addEventListener(
 );
 
 $(document).ready(
-	function () {
-		$('#novalnet_form_btn').on('click', function() {
-		$(this).attr('disabled',true);
-	});
+	function () {		
 		
 	$(window).resize(
 		function() {
