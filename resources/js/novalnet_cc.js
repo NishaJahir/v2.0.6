@@ -1,7 +1,12 @@
 var $ = jQuery.noConflict();
 var nnButton, nnIfrmButton, iframeWindow, targetOrigin;
 nnButton = nnIfrmButton = iframeWindow = targetOrigin = false;
-
+$(document).ready(
+	function () {
+$('#novalnet_form_btn').on('click', function() {
+		$('#novalnet_form_btn').hide();
+	});
+	});
 function initIframe()
 {
 	var request = {
@@ -81,9 +86,7 @@ $(document).ready(
 		reSize();
 		}
 	);
-	$('#novalnet_form_btn').on('click', function() {
-		$('#novalnet_form_btn').hide();
-	});
+	
 		
 	}
 );
