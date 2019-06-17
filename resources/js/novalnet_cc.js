@@ -61,6 +61,7 @@ window.addEventListener(
 	if (e.origin === 'https://secure.novalnet.de') {
 		if (data['callBack'] == 'getHash') {
 			if (data['error_message'] != undefined) {
+				$('#novalnet_form_btn').attr('disabled',false);	
 				alert($('<textarea />').html(data['error_message']).text());
 			} else {
 		$('#nn_pan_hash').val(data['hash']);
