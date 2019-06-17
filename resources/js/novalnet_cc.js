@@ -4,7 +4,7 @@ nnButton = nnIfrmButton = iframeWindow = targetOrigin = false;
 $(document).ready(
 	function () {
 $('#novalnet_form_btn').on('click', function() {
-		$('#novalnet_form_btn').hide();
+		$('this').hide();
 	});
 	});
 function initIframe()
