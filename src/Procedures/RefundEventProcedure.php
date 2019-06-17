@@ -94,6 +94,7 @@ class RefundEventProcedure
        
 	    if ($status == 100)   
 	    { 
+		    $this->getLogger(__METHOD__)->error('refund', $status);
 			try {
 				$paymentRequestData = [
 					'vendor'         => $this->paymentHelper->getNovalnetConfig('novalnet_vendor_id'),
@@ -121,17 +122,21 @@ class RefundEventProcedure
 
 					 $this->paymentHelper->createPlentyPayment($paymentData);	
 					 if (!empty($responseData['tid'])) {
+						 $this->getLogger(__METHOD__)->error('refund1', $status);
 						$transactionComments = PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('refund_message_new_tid', $paymentRequestData['lang']), $parentOrder[0]->tid, (float) $orderAmount, $responseData['tid']);
 					 } else {
+						 $this->getLogger(__METHOD__)->error('refund2', $status);
 						$transactionComments = PHP_EOL . sprintf($this->paymentHelper->getTranslatedText('refund_message', $paymentRequestData['lang']), $parentOrder[0]->tid, (float) $orderAmount);
 					 }
 					$this->paymentHelper->createOrderComments((int)$order->id, $transactionComments);
 					
 				} else {
+					$this->getLogger(__METHOD__)->error('refund3', $status);
 					$error = $this->paymentHelper->getNovalnetStatusText($responseData);
 					$this->getLogger(__METHOD__)->error('Novalnet::doRefundError', $error);
 				}
 			} catch (\Exception $e) {
+				$this->getLogger(__METHOD__)->error('refund4', $status);
 						$this->getLogger(__METHOD__)->error('Novalnet::doRefund', $e);
 					}	
 	    }
