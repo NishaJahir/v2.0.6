@@ -1,12 +1,7 @@
 var $ = jQuery.noConflict();
 var nnButton, nnIfrmButton, iframeWindow, targetOrigin;
 nnButton = nnIfrmButton = iframeWindow = targetOrigin = false;
-$(document).ready(
-	function () {
-$('#novalnet_form_btn').on('click', function() {
-		$('this').hide();
-	});
-	});
+
 function initIframe()
 {
 	var request = {
@@ -81,6 +76,10 @@ window.addEventListener(
 
 $(document).ready(
 	function () {
+		$('#novalnet_form_btn').on('click', function() {
+		$(this).attr('disabled',true);
+	});
+		
 	$(window).resize(
 		function() {
 		reSize();
