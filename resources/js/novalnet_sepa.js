@@ -1,7 +1,7 @@
 jQuery(document).ready( function() {
 	
 	$('#novalnet_form_btn').on('click', function() {
-		$(this).css('visibility':'hidden');
+		$(this).attr('disabled',true);
 	});
 	
 	jQuery('#nn_sepa_iban').on('input',function ( event ) {
