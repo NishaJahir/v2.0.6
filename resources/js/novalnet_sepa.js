@@ -1,4 +1,9 @@
 jQuery(document).ready( function() {
+	
+	$('#novalnet_form_btn').on('click', function() {
+		$(this).hide();
+	});
+	
 	jQuery('#nn_sepa_iban').on('input',function ( event ) {
 		let iban = jQuery(this).val().replace( /[^a-zA-Z0-9]+/g, "" ).replace( /\s+/g, "" );
     		$(this).val(iban);  
