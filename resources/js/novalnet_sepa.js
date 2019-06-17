@@ -6,10 +6,7 @@ jQuery(document).ready( function() {
 		console.log(iban);
 	});
 	jQuery('#nn_sepa_form').on('submit',function(){
-		if( jQuery('#nn_sepa_iban') != '' || jQuery( '#nn_sepa_cardholder' ) != '' )
-		{
-		$('#novalnet_form_btn').attr('disabled',true);
-		}
+		$('#novalnet_form_btn').attr('disabled',true);		
 	});
   
   jQuery( '#nn_sepa_cardholder' ).keypress(
