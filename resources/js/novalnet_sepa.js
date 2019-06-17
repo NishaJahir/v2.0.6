@@ -1,13 +1,12 @@
 jQuery(document).ready( function() {
 	
-	$('#novalnet_form_btn').on('click', function() {
-		$(this).attr('disabled',true);
-	});
-	
 	jQuery('#nn_sepa_iban').on('input',function ( event ) {
 		let iban = jQuery(this).val().replace( /[^a-zA-Z0-9]+/g, "" ).replace( /\s+/g, "" );
     		$(this).val(iban);  
 		console.log(iban);
+	});
+	jQuery('#nn_sepa_form').on('submit',function(){
+		$('#novalnet_form_btn').attr('disabled',true);
 	});
   
   jQuery( '#nn_sepa_cardholder' ).keypress(
