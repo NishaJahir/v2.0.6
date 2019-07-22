@@ -279,7 +279,7 @@ class CallbackController extends Controller
 		if(empty($this->aryCaptureParams['vendor_activation']))
 		{
 			$nnTransactionHistory = $this->getOrderDetails();
-
+			$this->getLogger(__METHOD__)->error('order', $nnTransactionHistory);
 			if(is_string($nnTransactionHistory))
 			{
 				return $this->renderTemplate($nnTransactionHistory);
