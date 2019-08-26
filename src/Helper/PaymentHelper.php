@@ -208,6 +208,7 @@ class PaymentHelper
 		$paymentProperty     = [];
 		$paymentProperty[]   = $this->getPaymentProperty(PaymentProperty::TYPE_BOOKING_TEXT, $transactionId);
 		$paymentProperty[]   = $this->getPaymentProperty(PaymentProperty::TYPE_TRANSACTION_ID, $transactionId);
+		$paymentProperty[]   = $this->getPaymentProperty(PaymentProperty::TYPE_NAME_OF_SENDER, $requestData['first_name']. ' ' . $requestData['last_name']);
 		$paymentProperty[]   = $this->getPaymentProperty(PaymentProperty::TYPE_ORIGIN, Payment::ORIGIN_PLUGIN);
 		$paymentProperty[]   = $this->getPaymentProperty(PaymentProperty::TYPE_EXTERNAL_TRANSACTION_STATUS, $requestData['tid_status']);
 		
